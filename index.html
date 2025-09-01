@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florque - Workflow Orchestrator & Automation Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background: #0f0f23;
+            color: #00ff00;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(45deg, #ff3333, #ffff33, #3333ff);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.1) 0px,
+                    rgba(0, 0, 0, 0.1) 1px,
+                    transparent 1px,
+                    transparent 2px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(0, 0, 0, 0.1) 0px,
+                    rgba(0, 0, 0, 0.1) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            background: rgba(15, 15, 35, 0.9);
+            padding: 40px;
+            border: 4px solid #fff;
+            border-radius: 0;
+            box-shadow: 0 0 0 4px #000, 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+            /* animation: pulse 2s ease-in-out infinite; */
+            filter: drop-shadow(4px 4px 0 #000) drop-shadow(-2px -2px 0 #ff3333);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: #ffff33;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .subtitle {
+            font-size: 0.8rem;
+            color: #00ff00;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .pixel-btn {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            padding: 15px 25px;
+            border: 4px solid #fff;
+            background: #3333ff;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            transition: all 0.1s ease;
+            text-shadow: 2px 2px 0 #000;
+            cursor: pointer;
+        }
+
+        .pixel-btn:hover {
+            background: #5555ff;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 #000;
+        }
+
+        .pixel-btn:active {
+            transform: translate(0, 0);
+            box-shadow: 2px 2px 0 #000;
+        }
+
+        .pixel-btn.secondary {
+            background: #ff3333;
+        }
+
+        .pixel-btn.secondary:hover {
+            background: #ff5555;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: #1a1a2e;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ffff33;
+            text-shadow: 3px 3px 0 #000;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .problem-card {
+            background: #2a2a4a;
+            border: 3px solid #00ff00;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .problem-title {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .problem-desc {
+            font-size: 0.7rem;
+            color: #cccccc;
+            line-height: 1.8;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: #1a1a2e;
+            border: 3px solid #ffff33;
+            padding: 30px;
+            position: relative;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .feature-desc {
+            font-size: 0.7rem;
+            color: #cccccc;
+            line-height: 1.8;
+        }
+
+        /* Benefits Section */
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            background: #2a2a4a;
+            padding: 20px;
+            border: 2px solid #ff3333;
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            margin-right: 20px;
+        }
+
+        .benefit-text {
+            font-size: 0.8rem;
+            color: #fff;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: #0f0f23;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .portal {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .final-cta-text {
+            font-size: 1.2rem;
+            color: #00ff00;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                max-width: 200px;
+            }
+
+            .tagline {
+                font-size: 0.8rem;
+            }
+
+            .subtitle {
+                font-size: 0.7rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pixel-btn {
+                font-size: 0.7rem;
+                padding: 12px 20px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .problem-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scrolling animation */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Pixel particles background */
+        .pixels {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .pixel {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00ff00;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Pixels Background -->
+    <div class="pixels" id="pixels"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="florque_logo_joystick.png" alt="Florque Logo" class="logo">
+            <p class="tagline">Workflow orchestrator and automation engine - from personal tasks to enterprise operations.</p>
+            <p class="subtitle">we're building the future of workflows - a system that automates everything.</p>
+            <div class="cta-buttons">
+                <a href="#" class="pixel-btn" onclick="joinTeam()">🕹 Join the Founding Team</a>
+                <a href="#" class="pixel-btn secondary" onclick="stayInLoop()">💌 Stay in the Loop</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Workflows today are like broken quests</h2>
+            <div class="problem-grid">
+                <div class="problem-card animate-on-scroll">
+                    <span class="problem-icon">💔</span>
+                    <h3 class="problem-title">Too Rigid</h3>
+                    <p class="problem-desc">Can't adapt to changing requirements or unexpected scenarios</p>
+                </div>
+                <div class="problem-card animate-on-scroll">
+                    <span class="problem-icon">🧩</span>
+                    <h3 class="problem-title">Scattered</h3>
+                    <p class="problem-desc">Spread across too many tools, creating workflow fragmentation</p>
+                </div>
+                <div class="problem-card animate-on-scroll">
+                    <span class="problem-icon">🕰</span>
+                    <h3 class="problem-title">Manual</h3>
+                    <p class="problem-desc">Humans doing robot work instead of focusing on creative tasks</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 60px;">
+                <p style="font-size: 1.2rem; color: #ffff33; text-shadow: 2px 2px 0 #000;" class="animate-on-scroll">
+                    Florque is the cheat code. Dynamic workflows that evolve as you play.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We're Building -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">What We're Building</h2>
+            <div style="text-align: center; font-size: 4rem; margin-bottom: 40px;" class="animate-on-scroll">🗺️</div>
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <span class="feature-icon">⚡</span>
+                    <h3 class="feature-title">Adaptive Workflows</h3>
+                    <p class="feature-desc">Start blank, grow step by step. Visual editor + chat-driven orchestration that evolves with your needs.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <span class="feature-icon">🤖</span>
+                    <h3 class="feature-title">Automation-First</h3>
+                    <p class="feature-desc">Let bots handle the grind. AI copilot generates workflows from natural language descriptions.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <span class="feature-icon">🌍</span>
+                    <h3 class="feature-title">Universal Scale</h3>
+                    <p class="feature-desc">From private quests to corporate boss fights. Nested workflows scale from simple tasks to enterprise processes.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <span class="feature-icon">🔧</span>
+                    <h3 class="feature-title">On-Demand Tooling</h3>
+                    <p class="feature-desc">Plug & play MCP servers for integrations. Run securely in your org's infra or Florque Cloud.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <span class="feature-icon">🛡️</span>
+                    <h3 class="feature-title">Security & Compliance</h3>
+                    <p class="feature-desc">Org-level auth, role-based access. Data never leaves your environment with local execution option.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <span class="feature-icon">💰</span>
+                    <h3 class="feature-title">Cost Efficient</h3>
+                    <p class="feature-desc">BYO LLM keys for individuals. Shared enterprise pools with quotas. On-demand execution avoids idle costs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Join Florque -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Why Join Florque?</h2>
+            <div style="text-align: center; font-size: 4rem; margin-bottom: 40px;" class="animate-on-scroll">💎</div>
+            <div class="benefits-list">
+                <div class="benefit-item animate-on-scroll">
+                    <span class="benefit-icon">🚀</span>
+                    <span class="benefit-text">Cutting-edge AI + workflow orchestration</span>
+                </div>
+                <div class="benefit-item animate-on-scroll">
+                    <span class="benefit-icon">🏰</span>
+                    <span class="benefit-text">Founding team — shape culture & product</span>
+                </div>
+                <div class="benefit-item animate-on-scroll">
+                    <span class="benefit-icon">💎</span>
+                    <span class="benefit-text">Equity & ownership (early loot drop)</span>
+                </div>
+                <div class="benefit-item animate-on-scroll">
+                    <span class="benefit-icon">🎮</span>
+                    <span class="benefit-text">Build the future of work — but fun</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="portal animate-on-scroll">🚪</div>
+            <p class="final-cta-text animate-on-scroll">Ready to press START and join Florque?</p>
+            <div class="cta-buttons">
+                <a href="#" class="pixel-btn" onclick="joinTeam()">🕹 Join the Founding Team</a>
+                <a href="#" class="pixel-btn secondary" onclick="stayInLoop()">💌 Follow the Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Create floating pixels
+        function createPixels() {
+            const pixelsContainer = document.getElementById('pixels');
+            const pixelCount = 50;
+
+            for (let i = 0; i < pixelCount; i++) {
+                const pixel = document.createElement('div');
+                pixel.className = 'pixel';
+                pixel.style.left = Math.random() * 100 + '%';
+                pixel.style.top = Math.random() * 100 + '%';
+                pixel.style.animationDelay = Math.random() * 6 + 's';
+                
+                // Random colors
+                const colors = ['#ff3333', '#ffff33', '#3333ff', '#00ff00'];
+                pixel.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                pixelsContainer.appendChild(pixel);
+            }
+        }
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // CTA Button Actions
+        function joinTeam() {
+            // Simple modal simulation
+            alert('🎮 QUEST ACCEPTED!\n\nJoining the founding team quest has been activated!\n\nA portal will open soon to guide you to the next level.\n\n(This would typically redirect to a job application or contact form)');
+        }
+
+        function stayInLoop() {
+            // Simple modal simulation
+            const email = prompt('🔔 Enter your email to stay in the loop:');
+            if (email) {
+                alert(`✅ SUCCESS!\n\nEmail "${email}" has been added to the Florque adventure log!\n\nYou'll receive updates about our quest progress.`);
+            }
+        }
+
+        // Konami Code Easter Egg
+        let konamiCode = [];
+        const konamiSequence = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'KeyB', 'KeyA'
+        ];
+
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                // Easter egg activated
+                document.body.style.filter = 'hue-rotate(180deg)';
+                alert('🎊 CHEAT CODE ACTIVATED!\n\n+30 Lives\n+Infinite Workflows\n+Rainbow Mode Enabled\n\nYou found the secret! Welcome to the inner circle of Florque adventurers!');
+                
+                // Reset after 5 seconds
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 5000);
+                
+                konamiCode = [];
+            }
+        });
+
+        // Add retro sound effects simulation
+        function playRetroSound(type) {
+            // Create audio context for retro-style beeps
+            if (typeof(AudioContext) !== "undefined" || typeof(webkitAudioContext) !== "undefined") {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                if (type === 'hover') {
+                    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                } else if (type === 'click') {
+                    oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                }
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.2);
+            }
+        }
+
+        // Add sound effects to buttons
+        document.querySelectorAll('.pixel-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', () => playRetroSound('hover'));
+            btn.addEventListener('click', () => playRetroSound('click'));
+        });
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            createPixels();
+            animateOnScroll();
+        });
+
+        // Add particle effect on click
+        document.addEventListener('click', (e) => {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.left = e.clientX + 'px';
+            particle.style.top = e.clientY + 'px';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = '#ffff33';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '9999';
+            particle.style.animation = 'float 1s ease-out forwards';
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
