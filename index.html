@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,9 +42,17 @@
         }
 
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .hero::before {
@@ -53,28 +62,24 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
+            background:
+                repeating-linear-gradient(0deg,
                     rgba(0, 0, 0, 0.1) 0px,
                     rgba(0, 0, 0, 0.1) 1px,
                     transparent 1px,
-                    transparent 2px
-                ),
-                repeating-linear-gradient(
-                    90deg,
+                    transparent 2px),
+                repeating-linear-gradient(90deg,
                     rgba(0, 0, 0, 0.1) 0px,
                     rgba(0, 0, 0, 0.1) 1px,
                     transparent 1px,
-                    transparent 2px
-                );
+                    transparent 2px);
             pointer-events: none;
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
-            background: rgba(15, 15, 35, 0.9);
+            /* background: rgba(15, 15, 35, 0.9); */
             padding: 40px;
             /* border: 4px solid #fff; */
             /* border-radius: 0; */
@@ -90,29 +95,37 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
         }
-        
+
         .hero-title {
             font-size: 3rem;
-            color: #ffff33;
+            color: #000000;
             /* margin-bottom: 30px; */
             /* text-shadow: 2px 2px 0 #000; */
         }
 
         .tagline {
             font-size: 2rem;
-            color: #ffff33;
+            color: #000000;
             margin-bottom: 30px;
-            text-shadow: 2px 2px 0 #000;
+            /* text-shadow: 2px 2px 0 #000; */
         }
 
         .subtitle {
             font-size: 1.2rem;
-            color: #fff;
+            color: #000000;
             margin-bottom: 40px;
-            text-shadow: 2px 2px 0 #000;
+            /* background-color: #000; */
+            /* text-shadow: 2px 2px 0 #000; */
         }
 
         .cta-buttons {
@@ -138,7 +151,7 @@
         }
 
         .pixel-btn:hover {
-            background: #5555ff;
+            background: #429aff;
             transform: translate(-2px, -2px);
             box-shadow: 4px 4px 0 #000;
         }
@@ -149,12 +162,12 @@
         }
 
         .pixel-btn.secondary {
-            border: 4px solid #000;
+            /* border: 4px solid #000; */
             background: #fff;
         }
 
         .pixel-btn.secondary:hover {
-            background: #ff5555;
+            background: #ffff33;
         }
 
         /* Section Styles */
@@ -184,7 +197,7 @@
 
         .problem-card {
             background: #2a2a4a;
-            border: 3px solid #00ff00;
+            border: 3px solid #ff0000;
             padding: 30px;
             text-align: center;
             position: relative;
@@ -225,7 +238,7 @@
 
         .feature-card {
             background: #1a1a2e;
-            border: 3px solid #ffff33;
+            border: 3px solid #00ff59;
             padding: 30px;
             position: relative;
         }
@@ -262,7 +275,7 @@
             align-items: center;
             background: #2a2a4a;
             padding: 20px;
-            border: 2px solid #ff3333;
+            border: 2px solid #ffff33;
         }
 
         .benefit-icon {
@@ -290,9 +303,22 @@
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
         }
 
         .final-cta-text {
@@ -369,11 +395,19 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- Floating Pixels Background -->
     <div class="pixels" id="pixels"></div>
@@ -383,11 +417,21 @@
         <div class="hero-content">
             <img src="florque_logo_joystick.png" alt="Florque Logo" class="logo">
             <h1 class="hero-title">Florque</h1>
-            <p class="tagline">AI Agents orchestrator and workflow automation engine.</p>
-            <p class="subtitle">we're building the future of workflows - a system that automates everything.</p>
+            <p class="tagline">Workflows orchestrator and ai-powered automation engine.</p>
+            <p class="subtitle">we're building the future of workflows - a system that automates everything leaving human in the loop.</p>
             <div class="cta-buttons">
-                <a href="#" class="pixel-btn" onclick="joinTeam()">🕹 Join the Team</a>
-                <a href="#" class="pixel-btn secondary" onclick="stayInLoop()">💌 Stay in the Loop</a>
+                <a href="https://discord.gg/x2f7tYnD5a" class="pixel-btn secondary" target="_blank" rel="noopener"
+                    style="display: flex; align-items: center; gap: 8px;">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord"
+                        style="width: 22px; height: 22px; filter: invert(0.8);" />
+                    Join the Community
+                </a>
+                <a href="https://www.linkedin.com/company/florque" class="pixel-btn secondary" target="_blank"
+                    rel="noopener" style="display: flex; align-items: center; gap: 8px;">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn"
+                        style="width: 22px; height: 22px; filter: invert(0.2);" />
+                    LinkedIn Page
+                </a>
             </div>
         </div>
     </section>
@@ -395,27 +439,46 @@
     <!-- Problem Statement -->
     <section class="section">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Workflows today are like broken quests</h2>
+            <h2 class="section-title animate-on-scroll">Operation workflows today are like broken quests</h2>
             <div class="problem-grid">
                 <div class="problem-card animate-on-scroll">
                     <span class="problem-icon">💔</span>
-                    <h3 class="problem-title">Too Rigid</h3>
-                    <p class="problem-desc">Can't adapt to changing requirements or unexpected scenarios</p>
+                    <h3 class="problem-title">Sensitive</h3>
+                    <p class="problem-desc">Mistakes have high cost</p>
+                </div>
+                <div class="problem-card animate-on-scroll">
+                    <span class="problem-icon">🔄</span>
+                    <h3 class="problem-title">Unstable</h3>
+                    <p class="problem-desc">Priorities shift in real-time, making workflows hard to predefine</p>
                 </div>
                 <div class="problem-card animate-on-scroll">
                     <span class="problem-icon">🧩</span>
-                    <h3 class="problem-title">Scattered</h3>
-                    <p class="problem-desc">Spread across too many tools, creating workflow fragmentation</p>
+                    <h3 class="problem-title">Fragmented</h3>
+                    <p class="problem-desc">No single source of truth, forcing ops teams to chase updates across emails, chats, and tickets</p>
                 </div>
                 <div class="problem-card animate-on-scroll">
-                    <span class="problem-icon">🕰</span>
+                    <span class="problem-icon">🗂️</span>
+                    <h3 class="problem-title">Outdated Practices</h3>
+                    <p class="problem-desc">Ops workflows are still managed like they were 20 years ago — with spreadsheets, emails, and reactive firefighting</p>
+                </div>
+                <div class="problem-card animate-on-scroll">
+                    <span class="problem-icon">⏳</span>
+                    <h3 class="problem-title">Ops Overhead</h3>
+                    <p class="problem-desc">Knowledge workers spend more time managing the process itself than solving the actual problem</p>
+                </div>
+                <div class="problem-card animate-on-scroll">
+                    <span class="problem-icon">❌</span>
                     <h3 class="problem-title">Manual</h3>
-                    <p class="problem-desc">Humans doing robot work instead of focusing on creative tasks</p>
+                    <p class="problem-desc">Manual tracking and human oversight lead to missed steps, duplicated work, and unclear ownership</p>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 60px;">
+                <p style="font-size: 2rem; color: #ffff33; text-shadow: 2px 2px 0 #000;" class="animate-on-scroll">
+                    🎮 Florque: Boss Fight Against Bureaucracy
+                </p>
                 <p style="font-size: 1.2rem; color: #ffff33; text-shadow: 2px 2px 0 #000;" class="animate-on-scroll">
-                    Florque is the cheat code. Dynamic workflows that evolve as you play.
+We built Florque to take on the final boss of modern work — endless forms, meetings, and messy workflows.
+Instead of letting bureaucracy drain your energy, Florque turns it into a game: you orchestrate workflows, track progress like levels, and keep humans in the loop as the true player one.
                 </p>
             </div>
         </div>
@@ -430,32 +493,37 @@
                 <div class="feature-card animate-on-scroll">
                     <span class="feature-icon">⚡</span>
                     <h3 class="feature-title">Adaptive Workflows</h3>
-                    <p class="feature-desc">Start blank, grow step by step. Visual editor + chat-driven interaction that tunes the workflow with your needs.</p>
+                    <p class="feature-desc">Start blank, grow step by step. Visual editor + chat-driven interaction that
+                        tunes the workflow with your needs.</p>
                 </div>
                 <div class="feature-card animate-on-scroll">
                     <span class="feature-icon">🤖</span>
                     <h3 class="feature-title">Automation-First</h3>
-                    <p class="feature-desc">Let bots handle the grind. AI copilot generates workflows from natural language descriptions.</p>
+                    <p class="feature-desc">Let bots handle the grind. AI copilot generates workflows from natural
+                        language descriptions.</p>
                 </div>
                 <div class="feature-card animate-on-scroll">
                     <span class="feature-icon">🌍</span>
                     <h3 class="feature-title">Universal Scale</h3>
-                    <p class="feature-desc">From private quests to corporate boss fights. Nested workflows scale from simple tasks to enterprise processes.</p>
+                    <p class="feature-desc">From private quests to corporate boss fights. Nested workflows scale from
+                        simple tasks to enterprise processes.</p>
                 </div>
                 <div class="feature-card animate-on-scroll">
                     <span class="feature-icon">🔧</span>
                     <h3 class="feature-title">On-Demand Tooling</h3>
-                    <p class="feature-desc">Plug & play MCP servers for integrations. Run securely in your org's infra or Florque Cloud.</p>
+                    <p class="feature-desc">Plug & play MCP servers for integrations. Run securely in your org's infra
+                        or Florque Cloud (soon).</p>
                 </div>
                 <div class="feature-card animate-on-scroll">
                     <span class="feature-icon">🛡️</span>
-                    <h3 class="feature-title">Security & Compliance</h3>
-                    <p class="feature-desc">Human-in-the-loop approach. Org-level auth, role-based access. Data never leaves your environment with local execution option.</p>
+                    <h3 class="feature-title">Safety</h3>
+                    <p class="feature-desc">Human-in-the-loop approach. Org-level auth, role-based access.</p>
                 </div>
                 <div class="feature-card animate-on-scroll">
                     <span class="feature-icon">💰</span>
                     <h3 class="feature-title">Cost Efficient</h3>
-                    <p class="feature-desc">BYO LLM keys for individuals. Shared enterprise pools with quotas. On-demand execution avoids idle costs.</p>
+                    <p class="feature-desc">BYO LLM keys for individuals. Shared enterprise pools with quotas. On-demand
+                        execution avoids idle costs.</p>
                 </div>
             </div>
         </div>
@@ -472,16 +540,12 @@
                     <span class="benefit-text">Cutting-edge AI Agents orchestration + workflow management</span>
                 </div>
                 <div class="benefit-item animate-on-scroll">
-                    <span class="benefit-icon">🏰</span>
-                    <span class="benefit-text">Founding team — shape culture & product</span>
+                    <span class="benefit-icon">🎮</span>
+                    <span class="benefit-text">Make an impact - Build the future of work</span>
                 </div>
                 <div class="benefit-item animate-on-scroll">
                     <span class="benefit-icon">💎</span>
                     <span class="benefit-text">Equity & ownership (early loot drop)</span>
-                </div>
-                <div class="benefit-item animate-on-scroll">
-                    <span class="benefit-icon">🎮</span>
-                    <span class="benefit-text">Build the future of work — but fun</span>
                 </div>
             </div>
         </div>
@@ -490,10 +554,20 @@
     <!-- Final CTA -->
     <section class="final-cta">
         <div class="container">
-            <div class="portal animate-on-scroll">🚪</div>
+            <!-- <div class="portal animate-on-scroll">🚪</div> -->
             <div class="cta-buttons">
-                <a href="#" class="pixel-btn" onclick="joinTeam()">🕹 Join the Founding Team</a>
-                <a href="#" class="pixel-btn secondary" onclick="stayInLoop()">💌 Follow the Journey</a>
+                <a href="https://discord.gg/x2f7tYnD5a" class="pixel-btn" target="_blank" rel="noopener"
+                    style="display: flex; align-items: center; gap: 8px;">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord"
+                        style="width: 22px; height: 22px; filter: invert(0.8);" />
+                    Join the Community
+                </a>
+                <a href="https://www.linkedin.com/company/florque" class="pixel-btn secondary" target="_blank"
+                    rel="noopener" style="display: flex; align-items: center; gap: 8px;">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn"
+                        style="width: 22px; height: 22px; filter: invert(0.2);" />
+                    LinkedIn Page
+                </a>
             </div>
         </div>
     </section>
@@ -510,11 +584,11 @@
                 pixel.style.left = Math.random() * 100 + '%';
                 pixel.style.top = Math.random() * 100 + '%';
                 pixel.style.animationDelay = Math.random() * 6 + 's';
-                
+
                 // Random colors
                 const colors = ['#ff3333', '#ffff33', '#3333ff', '#00ff00'];
                 pixel.style.background = colors[Math.floor(Math.random() * colors.length)];
-                
+
                 pixelsContainer.appendChild(pixel);
             }
         }
@@ -522,7 +596,7 @@
         // Animate elements on scroll
         function animateOnScroll() {
             const elements = document.querySelectorAll('.animate-on-scroll');
-            
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -568,12 +642,12 @@
                 // Easter egg activated
                 document.body.style.filter = 'hue-rotate(180deg)';
                 alert('🎊 CHEAT CODE ACTIVATED!\n\n+30 Lives\n+Infinite Workflows\n+Rainbow Mode Enabled\n\nYou found the secret! Welcome to the inner circle of Florque adventurers!');
-                
+
                 // Reset after 5 seconds
                 setTimeout(() => {
                     document.body.style.filter = 'none';
                 }, 5000);
-                
+
                 konamiCode = [];
             }
         });
@@ -581,7 +655,7 @@
         // Add retro sound effects simulation
         function playRetroSound(type) {
             // Create audio context for retro-style beeps
-            if (typeof(AudioContext) !== "undefined" || typeof(webkitAudioContext) !== "undefined") {
+            if (typeof (AudioContext) !== "undefined" || typeof (webkitAudioContext) !== "undefined") {
                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 const oscillator = audioContext.createOscillator();
                 const gainNode = audioContext.createGain();
@@ -628,13 +702,14 @@
             particle.style.pointerEvents = 'none';
             particle.style.zIndex = '9999';
             particle.style.animation = 'float 1s ease-out forwards';
-            
+
             document.body.appendChild(particle);
-            
+
             setTimeout(() => {
                 particle.remove();
             }, 1000);
         });
     </script>
 </body>
+
 </html>
