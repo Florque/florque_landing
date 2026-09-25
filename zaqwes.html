@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Tywo | AI Escape Room Quiz Game (WIP) - Florque AI Studio</title>
+    <link rel="icon" href="favicon.png">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#696FC7",
+                        "primary-fixed": "#A7AAE1",
+                        "on-surface": "#161c22",
+                        "surface-container": "#e9eef6",
+                        "surface-container-low": "#eff4fc",
+                        "surface": "#f7f9ff",
+                        "secondary": "#605e58",
+                        "accent-purple": "#7c3aed"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "mono": ["PT Mono", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #1c1c17;
+        }
+
+        /* Hero Section with preserved animated background style */
+        .hero {
+            background: linear-gradient(45deg, #ff3333, #ffff33, #3333ff);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(0deg,
+                    rgba(0, 0, 0, 0.1) 0px,
+                    rgba(0, 0, 0, 0.1) 1px,
+                    transparent 1px,
+                    transparent 2px),
+                repeating-linear-gradient(90deg,
+                    rgba(0, 0, 0, 0.1) 0px,
+                    rgba(0, 0, 0, 0.1) 1px,
+                    transparent 1px,
+                    transparent 2px);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="font-body-md selection:bg-purple-200">
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="max-w-[1140px] mx-auto px-6 pt-1 pb-28 text-center relative z-10">
+                <!-- Navigation -->
+                <header class="bg-transparent">
+                    <nav class="max-w-[1140px] mx-auto px-2 sm:px-6 h-20 flex justify-between items-center font-['Plus_Jakarta_Sans'] text-sm tracking-tight">
+                        <div class="flex items-center gap-6">
+                            <a class="text-xl sm:text-2xl font-bold text-stone-800 flex items-center gap-2" href="index.html">
+                                <img src="favicon.png" alt="Florque Logo" class="w-8 h-8">
+                                <span>Tywo</span>
+                            </a>
+                            <div class="hidden md:flex gap-6 items-center">
+                                <a class="text-stone-700 hover:text-stone-950 font-medium transition-colors" href="index.html">← Studio Home</a>
+                                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="#gameplay">Gameplay</a>
+                                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="#npc-engine">AI NPC Engine</a>
+                                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="index.html#projects">All Projects</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <a href="index.html" class="md:hidden text-stone-800 font-medium text-xs bg-white/80 px-3 py-1.5 rounded-lg border border-stone-300">
+                                ← Studio
+                            </a>
+                            <a href="https://discord.gg/x2f7tYnD5a" target="_blank" rel="noopener" class="bg-white text-stone-800 border border-stone-900 px-5 sm:px-7 py-2.5 rounded-xl font-semibold text-sm hover:bg-stone-50 transition-all shadow-sm flex items-center gap-2" data-analytics-event="click_tywo_playtest" data-analytics-params='{"location": "header_tywo"}'>
+                                <span class="w-2 h-2 rounded-full bg-purple-600 animate-ping"></span>
+                                Playtest Waitlist
+                            </a>
+                        </div>
+                    </nav>
+                </header>
+
+                <div class="h-16 md:h-20"></div>
+
+                <!-- WIP Status Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/90 backdrop-blur border border-purple-400 text-stone-900 rounded-full text-xs font-mono uppercase tracking-wider mb-6 font-bold shadow-sm">
+                    <span class="w-2.5 h-2.5 rounded-full bg-purple-600 animate-pulse"></span>
+                    Status: Work In Progress (WIP) • Interactive Gaming POC
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-stone-900 mb-6 max-w-3xl mx-auto drop-shadow-sm leading-tight">
+                    The AI Escape Room Quiz Powered by Emergent NPCs.
+                </h1>
+                <p class="text-lg sm:text-xl text-stone-900 mb-10 max-w-2xl mx-auto font-medium drop-shadow-sm leading-relaxed">
+                    AI-powered escape room quiz game where non-player characters (NPCs) leverage LLM backends for emergent, unpredictable, and dynamic gameplay logic.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="https://discord.gg/x2f7tYnD5a" target="_blank" rel="noopener" class="bg-stone-900 text-white border border-stone-900 px-8 py-3.5 rounded-xl font-semibold text-base hover:bg-stone-800 transition-all shadow-sm flex items-center gap-2" data-analytics-event="click_tywo_playtest" data-analytics-params='{"location": "hero_tywo"}'>
+                        <span class="material-symbols-outlined text-xl text-purple-400">sports_esports</span>
+                        Join Closed Playtest on Discord
+                    </a>
+                    <a href="index.html" class="bg-white border border-stone-300 text-stone-800 px-7 py-3.5 rounded-xl font-semibold text-base hover:bg-stone-50 transition-all shadow-sm flex items-center gap-2">
+                        ← Explore Studio Hub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- WIP Lab Callout -->
+        <section class="max-w-[1140px] mx-auto px-6 -mt-10 relative z-20">
+            <div class="bg-purple-50 border-2 border-purple-300 rounded-2xl p-6 sm:p-8 shadow-md flex flex-col md:flex-row items-center gap-6">
+                <div class="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-400 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-3xl text-purple-800">smart_toy</span>
+                </div>
+                <div class="flex-1 text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-2 mb-1">
+                        <h2 class="text-lg font-bold text-purple-950">Active Gaming R&D</h2>
+                        <span class="text-[10px] font-mono uppercase bg-purple-200 text-purple-900 px-2 py-0.5 rounded font-bold">In Development</span>
+                    </div>
+                    <p class="text-sm text-purple-950/80 leading-relaxed">
+                        Tywo is currently in early prototype stages. We are researching autonomous NPC goal reasoning, anti-jailbreak game bounds, and generative riddle synthesis. Playtest slots will be announced to Discord members first.
+                    </p>
+                </div>
+                <a href="https://discord.gg/x2f7tYnD5a" target="_blank" rel="noopener" class="whitespace-nowrap px-5 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-semibold text-xs tracking-wide uppercase transition-all shadow-sm">
+                    Join Alpha Tester Cohort →
+                </a>
+            </div>
+        </section>
+
+        <!-- Gameplay & Mechanics -->
+        <section id="gameplay" class="py-24 max-w-[1140px] mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="font-mono text-xs uppercase tracking-widest text-purple-700 font-bold block mb-2">Game Mechanics</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-stone-900 mb-4">No Scripted Dialogues. No Fixed Solutions.</h2>
+                <p class="text-stone-600 max-w-2xl mx-auto text-base">
+                    Every escape room quiz in Tywo is generated with bespoke constraints. You don't click multiple-choice options — you interrogate, convince, bargain, and outsmart living LLM-backed actors.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm hover:border-purple-300 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-700 flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-2xl">psychology_alt</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-3">1. Emergent NPC Minds</h3>
+                        <p class="text-stone-600 text-sm leading-relaxed mb-6">
+                            NPCs possess hidden memories, personal biases, and emotional triggers. Catch them in contradictions or appeal to their sympathies to reveal door ciphers.
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-100 text-xs font-mono text-stone-600">
+                        NPC Warder: "I swore never to speak of Sector 4... but your logic regarding the power grid is hard to ignore."
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm hover:border-purple-300 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-2xl">key</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-3">2. Dynamic Escape Quizzes</h3>
+                        <p class="text-stone-600 text-sm leading-relaxed mb-6">
+                            Riddles and room mechanics adapt to your player style. If you are aggressive, security tightens. If you solve puzzles cleverly, the environment reacts dynamically.
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-100 text-xs font-mono text-stone-600">
+                        Room Puzzle: Procedurally linked to ancient mathematical paradoxes and current room state.
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm hover:border-purple-300 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-2xl">lock_clock</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-3">3. High Stakes Timer Loop</h3>
+                        <p class="text-stone-600 text-sm leading-relaxed mb-6">
+                            Every question, dialogue turn, and failed attempt costs room oxygen and battery reserves. Rapid, clever deductions are critical to survive.
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-100 text-xs font-mono text-stone-600">
+                        Environmental metric: Oxygen 38% | Security Alert: LEVEL 2 | Escape probability: 64%
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Simulated Dialogue Terminal Preview -->
+        <section id="npc-engine" class="bg-stone-900 text-stone-100 py-20 border-y border-stone-800">
+            <div class="max-w-[1140px] mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="font-mono text-xs uppercase tracking-widest text-purple-400 font-bold block mb-2">Behind The Scenes</span>
+                        <h2 class="text-3xl font-bold text-white mb-6">Hybrid Deterministic / Generative Engine</h2>
+                        <p class="text-stone-400 mb-6 leading-relaxed">
+                            How do you stop LLMs from breaking escape room rules or hallucinating keys that don't exist? Tywo combines rigid deterministic state machines (locks, inventory, physics) with generative narrative models.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="p-4 bg-stone-800/80 rounded-xl border border-stone-700">
+                                <h4 class="font-bold text-purple-300 text-sm mb-1 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                                    State Guardrails & Verification
+                                </h4>
+                                <p class="text-xs text-stone-400">NPC dialogue cannot hallucinate door unlocks unless the verification engine confirms mathematical conditions are met.</p>
+                            </div>
+
+                            <div class="p-4 bg-stone-800/80 rounded-xl border border-stone-700">
+                                <h4 class="font-bold text-emerald-300 text-sm mb-1 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                    Dynamic Psychology State Machine
+                                </h4>
+                                <p class="text-xs text-stone-400">NPCs track suspicion, fear, and admiration metrics that directly color their token generation prompts in real time.</p>
+                            </div>
+
+                            <div class="p-4 bg-stone-800/80 rounded-xl border border-stone-700">
+                                <h4 class="font-bold text-amber-300 text-sm mb-1 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                                    Zero Pre-Written Dialogues
+                                </h4>
+                                <p class="text-xs text-stone-400">Every interaction is authentically negotiated. Your creativity defines your escape path.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Terminal Interactive Visual Mockup -->
+                    <div class="bg-black/90 rounded-3xl p-6 sm:p-8 border border-stone-800 font-mono text-xs shadow-2xl relative">
+                        <div class="flex items-center justify-between border-b border-stone-800 pb-3 mb-4 text-stone-500">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                                <span class="text-stone-400 text-[11px] ml-2">TYWO_CHAMBER_07.sh</span>
+                            </div>
+                            <span class="text-purple-400 text-[10px] font-bold tracking-widest">[LLM_NPC_ACTIVE]</span>
+                        </div>
+
+                        <!-- Chat Simulation -->
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <div class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800 font-bold text-[10px]">NPC: CIPHER_ARCHIVIST</div>
+                                <div class="text-stone-300 leading-relaxed bg-stone-900/60 p-3 rounded-xl border border-stone-800 flex-1">
+                                    "I hold the sequence to the airlock, human. But you have 90 seconds before the pressure valve blows. Why should I grant you passage when your companions deserted this station?"
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3 justify-end">
+                                <div class="text-stone-200 leading-relaxed bg-purple-900/40 p-3 rounded-xl border border-purple-700/50 flex-1 text-right">
+                                    <span class="text-purple-300">[Player Prompt]:</span> "They didn't desert; check telemetry log #449. The evacuation was ordered to preserve the core power you are running on right now."
+                                </div>
+                                <div class="px-2 py-0.5 rounded bg-stone-800 text-stone-300 border border-stone-700 font-bold text-[10px]">YOU</div>
+                            </div>
+
+                            <div class="p-3 bg-stone-950 rounded-xl border border-stone-800 text-[11px] space-y-1">
+                                <div class="text-stone-500 flex justify-between">
+                                    <span>[NPC REASONING ENGINE]</span>
+                                    <span class="text-emerald-400">PSYCHOLOGY: SUSPICION -25% | TRUST +35%</span>
+                                </div>
+                                <div class="text-stone-300">
+                                    NPC Archivist: "...Validating telemetry. The claim correlates. Riddle condition altered: What is the only prime divisible by its own reciprocal?"
+                                </div>
+                            </div>
+
+                            <div class="pt-2 flex items-center gap-2 text-stone-500 text-[11px]">
+                                <span class="animate-pulse text-purple-400">❯</span>
+                                <span class="text-stone-400">Input your answer or persuade the archivist...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other Studio Works Section -->
+        <section class="bg-white py-16 border-t border-stone-200">
+            <div class="max-w-[1140px] mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div>
+                        <span class="font-mono text-xs uppercase tracking-wider text-stone-500 font-bold">Florque AI Studio Portfolio</span>
+                        <h3 class="text-2xl font-bold text-stone-800 mt-1">Explore Sibling Projects</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="florque.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-stone-50 border border-stone-300 text-stone-800 hover:border-stone-400 font-medium text-sm transition-all shadow-sm">
+                            <span>Florque (Program Management)</span>
+                            <span class="text-[10px] font-mono uppercase tracking-wider bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">Live Beta</span>
+                            <span>→</span>
+                        </a>
+                        <a href="florque-lite.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-stone-50 border border-stone-300 text-stone-800 hover:border-stone-400 font-medium text-sm transition-all shadow-sm">
+                            <span>Florque Lite (Planner)</span>
+                            <span class="text-[10px] font-mono uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-bold">WIP</span>
+                            <span>→</span>
+                        </a>
+                        <a href="index.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-stone-900 text-white hover:bg-stone-800 font-medium text-sm transition-all shadow-sm">
+                            <span>Studio Hub</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-24 bg-stone-900 text-white relative">
+            <div class="max-w-[1140px] mx-auto px-6 text-center">
+                <div class="inline-block px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-mono uppercase tracking-wider mb-4 font-bold">
+                    Playtest Cohort
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Want to test the AI escape room first?</h2>
+                <p class="text-stone-300 max-w-xl mx-auto mb-8 text-base">
+                    Join our Discord community. We run weekly closed playtests to push LLM NPC boundaries, balance dynamic quizzes, and refine prompt engines.
+                </p>
+                <div class="flex justify-center gap-4 flex-wrap">
+                    <a href="https://discord.gg/x2f7tYnD5a" target="_blank" rel="noopener" class="bg-purple-600 text-white font-bold px-8 py-3.5 rounded-xl hover:bg-purple-500 transition-all shadow-sm flex items-center gap-2" data-analytics-event="click_tywo_playtest" data-analytics-params='{"location": "footer_cta_tywo"}'>
+                        Join Playtest on Discord
+                    </a>
+                    <a href="index.html" class="bg-stone-800 text-white border border-stone-700 px-6 py-3.5 rounded-xl font-medium hover:bg-stone-700 transition-all shadow-sm flex items-center gap-2">
+                        ← Return to Studio Hub
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#FDFBF7] border-t border-stone-200">
+        <div class="max-w-[1140px] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest">
+            <div class="flex flex-col items-center md:items-start gap-2">
+                <div class="flex items-center gap-2">
+                    <span class="text-lg font-bold text-stone-800">Tywo</span>
+                    <span class="text-stone-400 font-normal">by</span>
+                    <a href="index.html" class="text-stone-700 font-bold hover:text-stone-950">Florque AI Studio</a>
+                </div>
+                <p class="text-stone-500 normal-case tracking-normal">© 2026 Florque AI Studio. AI-powered interactive gaming and emergent NPCs.</p>
+            </div>
+            <div class="flex gap-8">
+                <a class="text-stone-500 hover:text-[#6A4C93] transition-all" href="privacypolicy.html">Privacy Policy</a>
+                <a class="text-stone-500 hover:text-[#6A4C93] transition-all" href="terms.html">Terms of Service</a>
+                <a class="text-stone-500 hover:text-[#6A4C93] transition-all" href="https://discord.gg/x2f7tYnD5a" target="_blank" rel="noopener">Discord Community</a>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="analytics.js"></script>
+</body>
+</html>

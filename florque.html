@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Florque | Program Management Agent - Florque AI Studio</title>
+    <link rel="icon" href="favicon.png">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#696FC7",
+                        "on-surface": "#161c22",
+                        "surface-container": "#e9eef6",
+                        "secondary-fixed-dim": "#c9c6bf",
+                        "surface-tint": "#696FC7",
+                        "on-primary-container": "#3a263c",
+                        "surface-container-high": "#e3e9f0",
+                        "on-tertiary-fixed": "#241a00",
+                        "surface-dim": "#d5dae2",
+                        "on-error-container": "#93000a",
+                        "surface": "#f7f9ff",
+                        "tertiary-fixed-dim": "#ebc23e",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#c7b3cc",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f7f9ff",
+                        "outline-variant": "#c4c8bf",
+                        "on-background": "#161c22",
+                        "on-secondary-fixed-variant": "#484741",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#dde3eb",
+                        "tertiary-container": "#cda721",
+                        "outline": "#747871",
+                        "secondary-container": "#e6e2da",
+                        "on-secondary-container": "#66645e",
+                        "surface-variant": "#dde3eb",
+                        "background": "#f7f9ff",
+                        "on-error": "#ffffff",
+                        "secondary": "#605e58",
+                        "on-primary-fixed-variant": "#4d3851",
+                        "tertiary": "#735c00",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffe087",
+                        "inverse-surface": "#2b3137",
+                        "on-surface-variant": "#434841",
+                        "on-secondary-fixed": "#1c1c17",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "primary": "#696FC7",
+                        "primary-container": "#696FC7",
+                        "secondary-fixed": "#e6e2da",
+                        "surface-container-low": "#eff4fc",
+                        "primary-fixed": "#A7AAE1",
+                        "inverse-on-surface": "#ecf1f9",
+                        "inverse-primary": "#c7b3cc",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#4e3d00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "stack-sm": "8px",
+                        "container-max": "1140px",
+                        "margin-page": "40px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #1c1c17;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(45deg, #ff3333, #ffff33, #3333ff);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(0deg,
+                    rgba(0, 0, 0, 0.1) 0px,
+                    rgba(0, 0, 0, 0.1) 1px,
+                    transparent 1px,
+                    transparent 2px),
+                repeating-linear-gradient(90deg,
+                    rgba(0, 0, 0, 0.1) 0px,
+                    rgba(0, 0, 0, 0.1) 1px,
+                    transparent 1px,
+                    transparent 2px);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-tertiary-fixed">
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="max-w-[1140px] mx-auto px-6 pt-1 pb-32 text-center relative z-10">
+                <!-- Top Navigation Bar -->
+                <header class="bg-transparent">
+                    <nav class="max-w-[1140px] mx-auto px-2 sm:px-6 h-20 flex justify-between items-center font-['Plus_Jakarta_Sans'] text-sm tracking-tight">
+                        <div class="flex items-center gap-6">
+                            <a class="text-xl sm:text-2xl font-bold text-stone-800 flex items-center gap-2" href="index.html">
+                                <img src="favicon.png" alt="Florque Logo" class="w-8 h-8">
+                                <span>Florque</span>
+                                <span class="hidden sm:inline-block text-[11px] font-['PT_Mono'] uppercase tracking-wider bg-stone-900/10 text-stone-800 px-2 py-0.5 rounded-full font-medium">Project R&D</span>
+                            </a>
+                            <div class="hidden md:flex gap-6 items-center">
+                                <a class="text-stone-700 hover:text-stone-950 font-medium transition-colors" href="index.html">← Studio Home</a>
+                                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="#" onclick="event.preventDefault(); document.querySelector('section.bg-surface-container-low').scrollIntoView({behavior:'smooth', block:'start'});">
+                                    Why Florque
+                                </a>
+                                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="https://github.com/Florque/florque-workgraph" target="_blank" rel="noopener">Framework</a>
+                                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="index.html#projects">All Projects</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <a href="index.html" class="md:hidden text-stone-800 font-medium text-xs bg-white/80 px-3 py-1.5 rounded-lg border border-stone-300">
+                                ← Studio
+                            </a>
+                            <a href="https://app.florque.com" class="bg-white text-stone-800 border border-stone-900 px-5 sm:px-8 py-2.5 sm:py-3 rounded-xl font-headline-md text-sm sm:text-base hover:brightness-110 transition-all shadow-sm flex items-center gap-2" target="_blank" rel="noopener" data-analytics-event="click_try_beta" data-analytics-params='{"location": "header_florque"}'>
+                                Spawn Your First Agent
+                            </a>
+                        </div>
+                    </nav>
+                </header>
+
+                <div class="h-16 md:h-24"></div>
+
+                <!-- Eyebrow -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/80 backdrop-blur border border-stone-800/10 text-stone-800 rounded-full text-label-sm mb-6 uppercase tracking-widest font-bold shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Florque AI Studio • Program Management Agent
+                </div>
+
+                <h1 class="font-headline-xl text-headline-xl text-stone-900 mb-6 max-w-3xl mx-auto drop-shadow-sm">
+                    Stop managing tasks. Start commanding an AI team.
+                </h1>
+                <p class="font-body-lg text-body-lg text-stone-900 mb-10 max-w-2xl mx-auto font-medium drop-shadow-sm">
+                    Florque is the first graph-native operating system that lets you spawn autonomous AI experts. Link your vision, strategy, and execution in one living map, and watch your business build itself.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <div class="flex gap-4 justify-center items-center flex-wrap">
+                        <a href="https://discord.gg/x2f7tYnD5a" class="bg-white border border-stone-200 text-stone-800 px-6 py-3 rounded-xl font-headline-md text-base hover:bg-stone-50 transition-all shadow-sm flex items-center gap-2" target="_blank" rel="noopener" data-analytics-event="click_discord">
+                            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord" class="w-5 h-5 opacity-70" />
+                            Join the Community
+                        </a>
+                        <a href="https://www.linkedin.com/company/florque" class="bg-white border border-stone-200 text-stone-800 px-6 py-3 rounded-xl font-headline-md text-base hover:bg-stone-50 transition-all shadow-sm flex items-center gap-2" target="_blank" rel="noopener" data-analytics-event="click_linkedin">
+                            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" class="w-5 h-5 opacity-70" />
+                            LinkedIn Page
+                        </a>
+                        <a href="https://app.florque.com" class="bg-white text-stone-800 border border-stone-900 px-8 py-3 rounded-xl font-headline-md text-base hover:brightness-110 transition-all shadow-sm flex items-center gap-2" target="_blank" rel="noopener" data-analytics-event="click_try_beta" data-analytics-params='{"location": "hero_florque"}'>
+                            Spawn Your First Agent
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: The Why (Bento Grid) -->
+        <section class="bg-surface-container-low py-24">
+            <div class="max-w-[1140px] mx-auto px-6">
+                <div class="mb-16">
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">The "Solo" ceiling is a myth.</h2>
+                    <p class="font-body-md text-body-md text-secondary max-w-xl">Most solo founders hit a wall because they try to be the CEO, the strategist, and the worker simultaneously. You’re not limited by your ideas; you’re limited by your bandwidth.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                    <div class="md:col-span-8 bg-white p-10 rounded-xl border border-stone-200/50 relative overflow-hidden group">
+                        <h3 class="font-headline-md text-headline-md mb-4 text-primary">The Shift</h3>
+                        <p class="text-secondary max-w-md mb-8">Stop treating AI like a chatbot that needs constant babysitting. Florque harnesses autonomous experts that live in your project’s context. They don't just "complete tickets"—they own the strategy, execute the tactics, and evolve your vision.</p>
+                        <img class="w-full h-48 object-contain" src="dissolve_illustration.png" alt="Context preservation and autonomous agent execution"/>
+                    </div>
+                    <div class="md:col-span-4 bg-[#696FC7] p-8 rounded-xl text-white flex flex-col justify-between">
+                        <div>
+                            <span class="material-symbols-outlined text-4xl mb-6">psychology</span>
+                            <h3 class="font-headline-md text-xl mb-4">Florque is built differently</h3>
+                            <p class="opacity-90 mb-4">Every piece of work lives inside a structure that preserves its reason for existing — so when you pick up a task two weeks later, you don't just see what to do. You see why it matters, what goal it serves, and whether that goal still makes sense.</p>
+                            <p class="text-sm opacity-85">Every project in Florque is structured around VSGT — Vision, Strategy, Goals, Tasks. When something shifts at any level, the impact on everything below it is immediately visible.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Solution (Framework) -->
+        <section class="py-24 max-w-[1140px] mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface mb-6">Keep the project context alive</h2>
+                    <p class="font-body-md text-body-md text-secondary mb-8">
+                        The VSGT Framework — Vision, Strategy, Goals, Tasks — isn't another complex system to learn. It's a natural descent from the abstract to the concrete, healing the ticket-vs-reality gap once and for all.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                            <span><strong>Context that survives execution:</strong> Every task carries its Goal and Strategy with it through the entire delivery cycle.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary mt-1">hub</span>
+                            <span><strong>AI Anomaly detection across the graph:</strong> Florque continuously surfaces orphaned tasks, uncovered Goals, and misaligned priorities.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary mt-1">auto_awesome</span>
+                            <span><strong>AI task generation grounded in your plan:</strong> Derive realistic, high-priority work directly from your active Strategy.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary mt-1">verified</span>
+                            <span><strong>Context validation at every level:</strong> Checks whether tasks still serve active objectives as priorities evolve.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary mt-1">tune</span>
+                            <span><strong>Agentic estimations:</strong> Draft Goal structures and task breakdowns reflecting your actual team velocity.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="relative bg-white border border-stone-200 p-8 rounded-2xl shadow-sm">
+                    <img class="w-full rounded-lg" alt="VSGT framework concentric diagram" src="vsgt_illustration.png"/>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: AI Partner -->
+        <section class="bg-[#F3F0EA] py-24 overflow-hidden">
+            <div class="max-w-[1140px] mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Your Project Management Copilot</h2>
+                    <p class="font-body-md text-body-md text-secondary max-w-xl mx-auto">You start the project from your vision, strategies and goals. Florque generates task breakdowns, suggests improvements, and warns about operational bottlenecks.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Feature Card 1 -->
+                    <div class="bg-white p-8 rounded-xl border border-stone-200 relative group hover:border-[#6A4C93] transition-all">
+                        <h3 class="font-headline-md text-xl mb-3">The Brain (Work Graph)</h3>
+                        <p class="text-secondary text-sm">Your project is a lineage, not a list. Our graph-native engine ensures every action you take is anchored to your North Star.</p>
+                        <img class="w-full object-contain mt-4 filter invert" src="idea_refiner_illustration.png" alt="Work Graph Brain"/>
+                    </div>
+                    <!-- Feature Card 2 -->
+                    <div class="bg-white p-8 rounded-xl border border-stone-200 relative group hover:border-[#6A4C93] transition-all">
+                        <h3 class="font-headline-md text-xl mb-3">The Team (Agentic Harnessing)</h3>
+                        <p class="text-secondary text-sm">Spawn specialized AI experts on-demand. From marketing strategists to backend engineers, each agent inherits your project’s entire context.</p>
+                        <img class="w-full object-contain mt-4 filter invert" src="task_shredder_illustration.png" alt="Agentic Harnessing"/>
+                    </div>
+                    <!-- Feature Card 3 -->
+                    <div class="bg-white p-8 rounded-xl border border-stone-200 relative group hover:border-[#6A4C93] transition-all">
+                        <h3 class="font-headline-md text-xl mb-3">The Pulse (VSGT Governance)</h3>
+                        <p class="text-secondary text-sm">Ensure your agents aren't just working—they're winning. Every output is filtered through your Vision-Strategy-Goal framework to prevent strategic drift.</p>
+                        <img class="w-full object-contain mt-4 filter invert" src="gentle_nudges_illustration.png" alt="VSGT Governance"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Roadmap -->
+        <section class="bg-white py-24 border-t border-stone-200/50">
+            <div class="max-w-[1140px] mx-auto px-6">
+                <div class="mb-16 text-center lg:text-left">
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">The Florque Evolution</h2>
+                    <p class="font-body-md text-body-md text-secondary max-w-xl">From personal clarity to agentic orchestration. We are building the neural network of your future company.</p>
+                </div>
+
+                <div class="relative space-y-12">
+                    <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-stone-200 -translate-x-1/2 hidden md:block"></div>
+                    
+                    <!-- Phase 1: Alpha -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between w-full group">
+                        <div class="md:w-[45%] mb-8 md:mb-0 order-2 md:order-1">
+                            <div class="bg-surface-container-low p-8 rounded-2xl border-t-4 border-[#d29922] shadow-sm hover:shadow-md transition-shadow">
+                                <span class="font-['PT_Mono'] text-[10px] uppercase tracking-[0.2em] text-[#d29922] font-bold mb-2 block">Stage 01: Alpha (Current)</span>
+                                <h3 class="font-headline-md text-2xl mb-3 text-stone-900">The Strategic Pilot</h3>
+                                <p class="text-secondary text-sm leading-relaxed">Fix your day. A smart ticket manager for solo founders. Turn the "vague fog" into a crisp work graph where every task is a direct line to your goal.</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-4 md:left-1/2 w-4 h-4 bg-white border-4 border-[#d29922] rounded-full -translate-x-1/2 z-10 shadow-[0_0_10px_rgba(210,153,34,0.3)]"></div>
+                        <div class="md:w-[45%] order-1 md:order-2"></div>
+                    </div>
+
+                    <!-- Phase 2: Beta -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between w-full group">
+                        <div class="md:w-[45%] order-2 md:order-2">
+                            <div class="bg-surface-container-low p-8 rounded-2xl border-t-4 border-[#1f6feb] shadow-sm hover:shadow-md transition-shadow">
+                                <span class="font-['PT_Mono'] text-[10px] uppercase tracking-[0.2em] text-[#1f6feb] font-bold mb-2 block">Stage 02: Beta (Q3 2026)</span>
+                                <h3 class="font-headline-md text-2xl mb-3 text-stone-900">The Context Engine</h3>
+                                <p class="text-secondary text-sm leading-relaxed">Fix your team. An AI Project Manager that monitors "blast impact" and eliminates implementation drift across shared strategies.</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-4 md:left-1/2 w-4 h-4 bg-white border-4 border-[#1f6feb] rounded-full -translate-x-1/2 z-10"></div>
+                        <div class="md:w-[45%] order-1 md:order-1"></div>
+                    </div>
+
+                    <!-- Phase 3: Horizon -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between w-full group">
+                        <div class="md:w-[45%] mb-8 md:mb-0 order-2 md:order-1">
+                            <div class="bg-surface-container-low p-8 rounded-2xl border-t-4 border-[#8957e5] shadow-sm hover:shadow-md transition-shadow">
+                                <span class="font-['PT_Mono'] text-[10px] uppercase tracking-[0.2em] text-[#8957e5] font-bold mb-2 block">Stage 03: Vision</span>
+                                <h3 class="font-headline-md text-2xl mb-3 text-stone-900">Business OS</h3>
+                                <p class="text-secondary text-sm leading-relaxed">The Company’s Brain. A central kernel for agentic orchestration. Total context preservation for autonomous execution via AI agents.</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-4 md:left-1/2 w-4 h-4 bg-white border-4 border-[#8957e5] rounded-full -translate-x-1/2 z-10"></div>
+                        <div class="md:w-[45%] order-1 md:order-2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other Studio Works Navigation -->
+        <section class="bg-stone-100 py-16 border-t border-stone-200">
+            <div class="max-w-[1140px] mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div>
+                        <span class="font-['PT_Mono'] text-xs uppercase tracking-wider text-stone-500 font-bold">Florque AI Studio Portfolio</span>
+                        <h3 class="text-2xl font-bold text-stone-800 mt-1">Explore Other Studio Works</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="florque-lite.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-stone-300 text-stone-800 hover:border-stone-400 font-medium text-sm transition-all shadow-sm">
+                            <span>Florque Lite</span>
+                            <span class="text-[10px] font-['PT_Mono'] uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-bold">WIP</span>
+                            <span>→</span>
+                        </a>
+                        <a href="tywo.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-stone-300 text-stone-800 hover:border-stone-400 font-medium text-sm transition-all shadow-sm">
+                            <span>Tywo</span>
+                            <span class="text-[10px] font-['PT_Mono'] uppercase tracking-wider bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-bold">WIP</span>
+                            <span>→</span>
+                        </a>
+                        <a href="index.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-stone-900 text-white hover:bg-stone-800 font-medium text-sm transition-all shadow-sm">
+                            <span>All Studio Works</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Closing CTA -->
+        <section class="py-24 bg-stone-900 text-white relative">
+            <div class="max-w-[1140px] mx-auto px-6 text-center">
+                <h2 class="font-headline-lg text-headline-lg mb-4">Stop managing. Start commanding.</h2>
+                <p class="text-stone-300 max-w-xl mx-auto mb-8 font-normal">Connect your vision directly to autonomous agents and experience graph-native project operations.</p>
+                <div class="flex justify-center gap-4 flex-wrap">
+                    <a href="https://app.florque.com" class="bg-white text-stone-800 border border-stone-900 px-8 py-3 rounded-xl font-headline-md text-base hover:brightness-110 transition-all shadow-sm flex items-center gap-2" target="_blank" rel="noopener" data-analytics-event="click_try_beta" data-analytics-params='{"location": "footer_cta_florque"}'>
+                        Spawn Your First Agent
+                    </a>
+                    <a href="index.html" class="bg-stone-800 text-white border border-stone-700 px-6 py-3 rounded-xl font-headline-md text-base hover:bg-stone-700 transition-all shadow-sm flex items-center gap-2">
+                        ← Return to Studio Hub
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#FDFBF7] border-t border-stone-200">
+        <div class="max-w-[1140px] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest">
+            <div class="flex flex-col items-center md:items-start gap-2">
+                <div class="flex items-center gap-2">
+                    <span class="text-lg font-bold text-stone-800">Florque</span>
+                    <span class="text-stone-400 font-normal">by</span>
+                    <a href="index.html" class="text-stone-700 font-bold hover:text-stone-950">Florque AI Studio</a>
+                </div>
+                <p class="text-stone-500 normal-case tracking-normal">© 2026 Florque AI Studio. Built for graph-native autonomous operations.</p>
+            </div>
+            <div class="flex gap-8">
+                <a class="text-stone-500 hover:text-[#6A4C93] transition-all" href="privacypolicy.html">Privacy Policy</a>
+                <a class="text-stone-500 hover:text-[#6A4C93] transition-all" href="terms.html">Terms of Service</a>
+                <a class="text-stone-500 hover:text-[#6A4C93] transition-all" href="https://discord.gg/x2f7tYnD5a" target="_blank" rel="noopener">Support & Community</a>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="analytics.js"></script>
+</body>
+</html>
